@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Form Pendaftaran PANKREAS PNJ</title>
+<style>
+
+body{
+font-family: Arial;
+background: linear-gradient(120deg,#f3e5f5,#e1bee7,#ce93d8);
+margin:0;
+}
+
+.header{
+text-align:center;
+background:#6a1b9a;
+color:white;
+padding:20px;
+}
+
+h2{
+text-align:center;
+color:#4a148c;
+}
+
+table{
+margin:auto;
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0px 0px 15px rgba(0,0,0,0.2);
+}
+
+td{
+padding:8px;
+}
+
+input, select, textarea{
+padding:6px;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+button{
+padding:10px 18px;
+background:#8e24aa;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#6a1b9a;
+}
+
+canvas{
+display:block;
+border:none;
+}
+</style>
+</head>
+<body>
+<div class="header" style="position: relative; overflow: hidden; min-height: 200px;">
+<canvas id="headerCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></canvas>
+<div style="position: relative; z-index: 2; pointer-events: none;">
+<h1>PANKREAS PNJ</h1>
+<p>UKM Pecinta Seni dan Kreativitas Politeknik Negeri Jakarta</p>
+<svg width="60" height="60">
+<circle cx="30" cy="30" r="28" fill="white" opacity="0.8"/>
+<text x="50%" y="55%" text-anchor="middle" fill="#6a1b9a" font-weight="bold">PNJ</text>
+</svg>
+</div>
+</div>
+
+<h2>Form Pendaftaran Anggota Baru</h2>
+<form onsubmit="return submitForm()" autocomplete="off">
+<table>
+
+<tr>
+<td colspan="2"><hr><b>Data Mahasiswa</b></td>
+</tr>
+
+<tr>
+<td>Nama Lengkap</td>
+<td><input type="text" name="nama" required></td>
+</tr>
+
+<tr>
+<td>NIM</td>
+<td><input type="text" name="nim" required></td>
+</tr>
+
+<tr>
+<td>Jurusan</td>
+<td>
+<select id="jurusan" name="jurusan" onchange="updateProdi()" required>
+<option value="">-- Pilih Jurusan --</option>
+<option value="tik">Teknik Informatika dan Komputer</option>
+<option value="elektro">Teknik Elektro</option>
+<option value="mesin">Teknik Mesin</option>
+<option value="sipil">Teknik Sipil</option>
+<option value="akuntansi">Akuntansi</option>
+<option value="an">Administrasi Niaga</option>
+<option value="grafika">Teknik Grafika Penerbitan</option>
+</select>
+</td>
+</tr>
+
+<tr>
+<td>Program Studi</td>
+<td>
+<select id="prodi" name="prodi" required>
+<option>-- Pilih Prodi --</option>
+</select>
+</td>
+</tr>
+
+<tr>
+<td>Kelas</td>
+<td><input type="text" name="kelas" placeholder="Contoh: TI 2B"></td>
+</tr>
+
+<tr>
+<td>Angkatan</td>
+<td><input type="number" name="angkatan" placeholder="Contoh: 2026"></td>
+</tr>
+
+<tr>
+<td>Jenis Kelamin</td>
+<td>
+<input type="radio" name="jk" value="Laki-laki" required> Laki-laki
+<input type="radio" name="jk" value="Perempuan"> Perempuan
+</td>
+</tr>
+
+<tr>
+<td>Tanggal Lahir</td>
+<td><input type="date" name="tanggal_lahir"></td>
+</tr>
+
+<tr>
+<td colspan="2"><hr><b>Kontak</b></td>
+</tr>
+
+<tr>
+<td>Email</td>
+<td><input type="email" name="email" required></td>
+</tr>
+
+<tr>
+<td>No HP</td>
+<td><input type="tel" name="nohp" required></td>
+</tr>
+
+<tr>
+<td>Domisili</td>
+<td><input type="text" name="domisili"></td>
+</tr>
+
+<tr>
+<td colspan="2"><hr><b>Minat Seni</b></td>
+</tr>
+
+<tr>
+<td>Bidang Seni</td>
+<td>
+<input type="checkbox" name="seni" value="musik"> Musik
+<input type="checkbox" name="seni" value="tari"> Tari
+<input type="checkbox" name="seni" value="teater"> Teater
+<input type="checkbox" name="seni" value="fotografi"> Fotografi
+<input type="checkbox" name="seni" value="desain"> Desain
+</td>
+</tr>
+
+<tr>
+<td>Mulai Menyukai Seni</td>
+<td><input type="date" name="mulai_seni"></td>
+</tr>
+
+<tr>
+<td>Frekuensi Latihan</td>
+<td>
+<select name="frekuensi">
+<option>Jarang</option>
+<option>1-2 kali seminggu</option>
+<option>3-4 kali seminggu</option>
+<option>Hampir setiap hari</option>
+</select>
+</td>
+</tr>
+
+<tr>
+<td>Alat Seni Favorit</td>
+<td>
+<input list="alatSeni" name="alat_seni">
+<datalist id="alatSeni">
+<option value="Gitar">
+<option value="Piano">
+<option value="Kamera">
+<option value="Kuas Lukis">
+<option value="Tablet Desain">
+</datalist>
+</td>
+</tr>
+
+<tr>
+<td>Skill Seni</td>
+<td><input type="range" min="0" max="10" name="skill"></td>
+</tr>
+
+<tr>
+<td>Waktu Luang untuk UKM</td>
+<td><input type="time" name="waktu_luang"></td>
+</tr>
+
+<tr>
+<td colspan="2"><hr><b>Informasi Tambahan</b></td>
+</tr>
+
+<tr>
+<td>Mengetahui PANKREAS dari</td>
+<td>
+<input type="radio" name="info" value="instagram"> Instagram
+<input type="radio" name="info" value="teman"> Teman
+<input type="radio" name="info" value="website"> Website PNJ
+<input type="radio" name="info" value="poster"> Poster Kampus
+</td>
+</tr>
+
+<tr>
+<td>Ukuran Kaos</td>
+<td>
+<select name="kaos">
+<option>XS</option>
+<option>S</option>
+<option>M</option>
+<option>L</option>
+<option>XL</option>
+<option>XXL</option>
+<option>XXXL</option>
+</select>
+</td>
+</tr>
+
+<tr>
+<td>Link Portfolio</td>
+<td><input type="url" name="portfolio"></td>
+</tr>
+
+<tr>
+<td>Upload Karya</td>
+<td><input type="file" name="karya"></td>
+</tr>
+
+<tr>
+<td>Alasan Bergabung</td>
+<td><textarea rows="4" name="alasan"></textarea></td>
+</tr>
+
+<tr>
+<td colspan="2">
+<input type="checkbox" name="persetujuan"> Saya menyatakan data yang diisi sudah benar
+</td>
+</tr>
+
+<tr>
+<td colspan="2" align="center">
+<button type="submit">Daftar</button>
+<button type="reset">Reset</button>
+</td>
+</tr>
+
+</table>
+</form>
+
+<br>
+
+<script>
+var canvas = document.getElementById("headerCanvas"); // Ambil kertas gambar
+var ctx = canvas.getContext("2d"); // Ambil kuas (2D)
+
+// 1. Tentukan ukuran dulu
+canvas.width = window.innerWidth; // Lebar canvas = lebar layar
+canvas.height = 200; // Tinggi canvas = 200px	
+
+// 2. Baru gambar
+function drawAbstract() {
+let warna = ["#9c27b0", "#e1bee7", "#7b1fa2", "#ba68c8"]; // Daftar warna ungu
+for (let i = 0; i < 20; i++) { // Ulangi 20x
+let x = Math.random() * canvas.width; // Posisi X acak
+let y = Math.random() * canvas.height; // Posisi Y acak
+let radius = Math.random() * 50 + 10; // Ukuran bulatan acak
+
+ctx.beginPath(); // Mulai garis baru
+ctx.arc(x, y, radius, 0, Math.PI * 2); // Gambar pola lingkaran
+ctx.fillStyle = warna[Math.floor(Math.random() * warna.length)]; // Pilih warna acak
+ctx.globalAlpha = 0.3; // Bikin transparan (30%)
+ctx.fill(); // Warnai lingkarannya
+    }
+}
+drawAbstract(); // Panggil fungsinya
+
+function updateProdi(){
+
+let jurusan = document.getElementById("jurusan").value;
+let prodi = document.getElementById("prodi");
+prodi.innerHTML = "<option>-- Pilih Prodi --</option>";
+
+if(jurusan === "tik"){
+prodi.innerHTML += "<option>Teknik Informatika</option>";
+prodi.innerHTML += "<option>Teknik Multimedia dan Jaringan</option>";
+prodi.innerHTML += "<option>Teknik Multimedia Digital</option>";
+}
+
+else if(jurusan === "elektro"){
+prodi.innerHTML += "<option>Teknik Listrik</option>";
+prodi.innerHTML += "<option>Telekomunikasi</option>";
+prodi.innerHTML += "<option>Elektronika Industri</option>";
+prodi.innerHTML += "<option>Instrumentasi dan Kontrol Industri</option>";
+prodi.innerHTML += "<option>Broadband Multimedia</option>";
+prodi.innerHTML += "<option>Teknik Otomasi Listrik Industri</option>";
+}
+
+else if(jurusan === "mesin"){
+prodi.innerHTML += "<option>Teknik Mesin</option>";
+prodi.innerHTML += "<option>Teknik Rekayasa Konversi Energi</option>";
+prodi.innerHTML += "<option>Teknologi Rekayasa Pemeliharaan Alat Berat</option>";
+prodi.innerHTML += "<option>Teknologi Rekayasa Manufaktur</option>";
+prodi.innerHTML += "<option>Teknologi Rekayasa Pembangkit Energi</option>";
+}
+
+else if(jurusan === "sipil"){
+prodi.innerHTML += "<option>Konstruksi Sipil</option>";
+prodi.innerHTML += "<option>Konstruksi Gedung</option>";
+prodi.innerHTML += "<option>Teknik Perancangan Jalan dan Jembatan</option>";
+prodi.innerHTML += "<option>Teknik 	Konstruksi Gedung</option>";
+}
+
+else if(jurusan === "akuntansi"){
+prodi.innerHTML += "<option>Akuntansi</option>";
+prodi.innerHTML += "<option>Keuangan dan Perbankan</option>";
+prodi.innerHTML += "<option>Keuangan dan Perbankan Syariah</option>";
+prodi.innerHTML += "<option>Akuntansi Keuangan</option>";
+prodi.innerHTML += "<option>Manajemen Keuangan</option>";
+}
+
+else if(jurusan === "an"){
+prodi.innerHTML += "<option>Administrasi Bisnis</option>";
+prodi.innerHTML += "<option>Usaha Jasa Konversi, Perjalanan Insentif dan Pameran (MICE)</option>";
+prodi.innerHTML += "<option>Administrasi Bisnis Terapan</option>";
+prodi.innerHTML += "<option>Bahasa Inggris untuk Komunikasi Bisnis dan Profesional</option>";
+}
+
+else if(jurusan === "grafika"){
+prodi.innerHTML += "<option>Penerbitan</option>";
+prodi.innerHTML += "<option>Desain Grafis</option>";
+prodi.innerHTML += "<option>Teknologi Industri Cetak Kemasan</option>";
+prodi.innerHTML += "<option>Teknologi Rekayasa Cetak dan Grafis 3 Dimensi</option>";
+}
+}
+
+function submitForm(){
+alert("Pendaftaran berhasil!\n\nTerima kasih sudah mendaftar di UKM PANKREAS PNJ.");
+return true;
+}
+</script>
+
+</body>
+</html>
